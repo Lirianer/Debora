@@ -12,7 +12,7 @@ public class Constants
     // Keyboard 1 (left)
     public const string KEYBOARD1_VERTICALAXIS = "keyboard_1_Y";
     public const string KEYBOARD1_HORIZONTALAXIS = "keyboard_1_X";
-    public const string KEYBOARD1_BUTTON_A = "keyboard_1_B";
+    public const string KEYBOARD1_BUTTON_A = "keyboard_1_A";
     public const string KEYBOARD1_BUTTON_B = "";
 
     // Keyboard 2 (right)
@@ -35,5 +35,6 @@ public class Constants
 
 
     public const float TIME_BETWEEN_ITEM_SPAWNS = 5;
-
+    public const float ITEM_DURATION = 10;
+    public const float PLAYER_NORMAL_SPEED = 5;
 }

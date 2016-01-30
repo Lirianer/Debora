@@ -31,7 +31,6 @@ public class WorldController : MonoBehaviour
             else if (gamePadsOccupied == 1) {
                 ret = Constants.GAMEPAD_2;
             }
-            Debug.Log(ret);
             gamePadsOccupied++;
         }
         else {

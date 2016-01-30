@@ -1,25 +1,33 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum ItemType {PEANUT, FISH, CHEESE}
+public enum ItemType {PEANUT, FISH, CHEESE, NONE}
 
-public class Item {
-	public ItemType Type { get; private set; }
-	Sprite sprite;
+public class Item : MonoBehaviour
+{
+    public ItemType type;
+    
 
-	public Item (ItemType type)
-	{
-		Type = type;
-
-		switch (Type) {
-		case ItemType.PEANUT:
-			break;
-		case ItemType.FISH:
-			break;
-		case ItemType.CHEESE:
-			break;
-		}
+    void Start()
+    {
+        Invoke("OnTimeUp", Constants.ITEM_DURATION);
+    }
 
 
-	}
+    void OnTimeUp()
+    {
+        Destroy(gameObject);
+    }
+
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+    }
+
+
+    public ItemType GetItemType()
+    {
+        return type;
+    }
 }

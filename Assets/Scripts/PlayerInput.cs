@@ -18,8 +18,14 @@ public class PlayerInput : MonoBehaviour
     public void SetControlType(string controlType)
     {
         this.controlType = controlType;
+    }
 
-        print("set control type: " + controlType);
+
+    void Update()
+    {
+        if (Input.GetAxis(actionButton) > 0) {
+            GetComponent<PlayerController>().OnActionButton();
+        }
     }
 
 	

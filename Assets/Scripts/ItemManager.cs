@@ -25,12 +25,8 @@ public class ItemManager : MonoBehaviour
 
     void OnSpawnItemTime()
     {
-        print(GetRandomSpawnPos());
-
         GameObject randomItemPrefab = Utils.mGetRandomListElement<GameObject>(itemPrefabs);
         Instantiate(randomItemPrefab, GetRandomSpawnPos(), Quaternion.identity);
-
-        print("instantiate " + randomItemPrefab);
     }
 
 
@@ -66,9 +62,4 @@ public class ItemManager : MonoBehaviour
         return new List<Transform>(GameObject.Find("Floors").GetComponentsInChildren<Transform>());
     }
 
-
-    List<Transform> GetAllWallTransforms()
-    {
-        return new List<Transform>(GameObject.Find("Floors").GetComponentsInChildren<Transform>());
-    }
 }
