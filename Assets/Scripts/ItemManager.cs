@@ -27,7 +27,31 @@ public class ItemManager : MonoBehaviour
     void SpawnItem()
     {
         GameObject randomItemPrefab = Utils.mGetRandomListElement<GameObject>(itemPrefabs);
-        Instantiate(randomItemPrefab, GetRandomPositionAwayFromWalls(), Quaternion.identity);
+        Instantiate(randomItemPrefab, GetRandomSpawnPos(), Quaternion.identity);
+    }
+
+
+    static Vector2 GetRandomSpawnPos()
+    {
+        Vector2 pos;
+        do {
+            pos = GetRandomPositionAwayFromWalls();
+        }
+        while (IsNearCauldron(pos));
+
+        return pos;
+    }
+
+
+    static bool IsNearCauldron(Vector2 pos)
+    {
+        return Vector2.Distance(pos, GetCauldronPos()) < 4;
+    }
+
+    
+    static Vector2 GetCauldronPos()
+    {
+        return GameObject.Find("Cauldron").transform.position;
     }
 
 
