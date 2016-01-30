@@ -17,8 +17,26 @@ public class PlayerController : MonoBehaviour {
 
     void Start()
     {
+        Reset();
+        SetInRandomPos();
+    }
+
+
+    void Reset()
+    {
         input = GetComponent<PlayerInput>();
         Type = PlayerType.WIZARD;
+        collidingItem = null;
+        pickedUpItemType = ItemType.NONE;
+        TransformIntoWizard();
+        CancelInvoke("TransformIntoWizard");
+        GetComponent<Inventory>().HideIcon();
+    }
+
+
+    void SetInRandomPos()
+    {
+        transform.position = ItemManager.GetRandomPositionAwayFromWalls();
     }
 
 
@@ -56,13 +74,8 @@ public class PlayerController : MonoBehaviour {
 
     void Win(PlayerController otherPlayer)
     {
-        Destroy(otherPlayer.gameObject);
-    }
-
-
-    void Lose(PlayerController otherPlayer)
-    {
-        Destroy(gameObject);
+        otherPlayer.Start();
+        Reset();
     }
 
 
@@ -73,7 +86,7 @@ public class PlayerController : MonoBehaviour {
          if (otherPlayer != null) { //Colliding with another player
             if (Type == PlayerType.WIZARD) {
                 if (otherPlayer.IsTransformed()) {
-                    Lose(otherPlayer);
+                    otherPlayer.Win(this);
                 }
             }
             else if (!otherPlayer.IsTransformed()) {
@@ -110,13 +123,20 @@ public class PlayerController : MonoBehaviour {
     public void OnActionButton()
     {
         if (collidingItem != null && pickedUpItemType == ItemType.NONE) {
-            pickedUpItemType = collidingItem.GetComponent<Item>().GetItemType();
-            Destroy(collidingItem.gameObject);
+            PickUpItem();
         }
 
         if (isNearCauldron && pickedUpItemType != ItemType.NONE && Type == PlayerType.WIZARD) {
             Transform();
         }
+    }
+
+
+    void PickUpItem()
+    {
+        pickedUpItemType = collidingItem.GetComponent<Item>().GetItemType();
+        Destroy(collidingItem.gameObject);
+        GetComponent<Inventory>().ShowIcon(pickedUpItemType);
     }
 
 
@@ -132,12 +152,14 @@ public class PlayerController : MonoBehaviour {
             TransformIntoElephant();
         }
 
-        Invoke("OnTransformTimeUp", Constants.TRANSFORMATION_DURATION);
+        
+        Invoke("TransformIntoWizard", Constants.TRANSFORMATION_DURATION);
         pickedUpItemType = ItemType.NONE;
+        GetComponent<Inventory>().HideIcon();
     }
 
 
-    void OnTransformTimeUp()
+    void TransformIntoWizard()
     {
         SetColor(new Color(1, 1, 1));
         Type = PlayerType.WIZARD;

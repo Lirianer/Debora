@@ -19,18 +19,19 @@ public class ItemManager : MonoBehaviour
 
         itemPrefabs = new List<GameObject> { fishPrefab, peanutPrefab, cheesePrefab };
 
-        InvokeRepeating("OnSpawnItemTime", 0, Constants.TIME_BETWEEN_ITEM_SPAWNS);
+        SpawnItem();
+        InvokeRepeating("SpawnItem", 0, Constants.TIME_BETWEEN_ITEM_SPAWNS);
     }
 
 
-    void OnSpawnItemTime()
+    void SpawnItem()
     {
         GameObject randomItemPrefab = Utils.mGetRandomListElement<GameObject>(itemPrefabs);
-        Instantiate(randomItemPrefab, GetRandomSpawnPos(), Quaternion.identity);
+        Instantiate(randomItemPrefab, GetRandomPositionAwayFromWalls(), Quaternion.identity);
     }
 
 
-    Vector2 GetRandomSpawnPos()
+    static public Vector2 GetRandomPositionAwayFromWalls()
     {
         List<Transform> allFloorTransforms = GetAllFloorTransforms();
 
@@ -44,20 +45,20 @@ public class ItemManager : MonoBehaviour
     }
 
 
-    bool IsThereAColliderNearby(Transform transform)
+    static bool IsThereAColliderNearby(Transform transform)
     {
         List<Collider2D> colliders = new List<Collider2D>(FindObjectsOfType<Collider2D>());
         return colliders.Exists(x => IsColliderNear(x, transform));
     }
 
 
-    bool IsColliderNear(Collider2D collider, Transform transform)
+    static bool IsColliderNear(Collider2D collider, Transform transform)
     {
         return Vector2.Distance(collider.transform.position, transform.position) < 0.5f;
     }
     
 
-    List<Transform> GetAllFloorTransforms()
+    static List<Transform> GetAllFloorTransforms()
     {
         return new List<Transform>(GameObject.Find("Floors").GetComponentsInChildren<Transform>());
     }
