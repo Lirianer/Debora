@@ -37,4 +37,5 @@ public class Constants
     public const float TIME_BETWEEN_ITEM_SPAWNS = 5;
     public const float ITEM_DURATION = 10;
     public const float PLAYER_NORMAL_SPEED = 5;
+    public const float TRANSFORMATION_DURATION = 10;
 }

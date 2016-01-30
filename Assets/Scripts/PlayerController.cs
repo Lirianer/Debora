@@ -13,8 +13,8 @@ public class PlayerController : MonoBehaviour {
     PlayerInput input;
     ItemType pickedUpItemType = ItemType.NONE;
     bool isNearCauldron = false;
-
     GameObject collidingItem = null;
+    bool isTransformed = false;
 
     void Start()
     {
@@ -40,11 +40,6 @@ public class PlayerController : MonoBehaviour {
     {
         facingLeft = !facingLeft;
         GetComponent<SpriteRenderer>().flipX = !facingLeft;
-    }
-
-    public void Transform(PlayerType transform)
-    {
-        Type = transform;
     }
 
 
@@ -75,7 +70,7 @@ public class PlayerController : MonoBehaviour {
             Destroy(collidingItem.gameObject);
         }
 
-        if (isNearCauldron && pickedUpItemType != ItemType.NONE) {
+        if (isNearCauldron && pickedUpItemType != ItemType.NONE && !isTransformed) {
             Transform();
         }
     }
@@ -92,6 +87,17 @@ public class PlayerController : MonoBehaviour {
         else if (pickedUpItemType == ItemType.PEANUT) {
             TransformIntoElephant();
         }
+
+        isTransformed = true;
+        Invoke("OnTransformTimeUp", Constants.TRANSFORMATION_DURATION);
+        pickedUpItemType = ItemType.NONE;
+    }
+
+
+    void OnTransformTimeUp()
+    {
+        SetColor(new Color(1, 1, 1));
+        isTransformed = false;
     }
 
 
