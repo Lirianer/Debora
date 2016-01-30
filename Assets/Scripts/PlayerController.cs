@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum PlayerType {WIZARD, RAT, CAT, ELEPHANT};
+public enum PlayerType {WIZARD, MOUSE, CAT, ELEPHANT};
 
 public class PlayerController : MonoBehaviour {
 
@@ -14,11 +14,11 @@ public class PlayerController : MonoBehaviour {
     ItemType pickedUpItemType = ItemType.NONE;
     bool isNearCauldron = false;
     GameObject collidingItem = null;
-    bool isTransformed = false;
 
     void Start()
     {
         input = GetComponent<PlayerInput>();
+        Type = PlayerType.WIZARD;
     }
 
 
@@ -43,13 +43,57 @@ public class PlayerController : MonoBehaviour {
     }
 
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.GetComponent<Item>() != null) {
-            collidingItem = collision.gameObject;
+        if (collider.GetComponent<Item>() != null) {
+            collidingItem = collider.gameObject;
         }
-        else if (collision.name == "Cauldron") {
+        else if (collider.name == "Cauldron") {
             isNearCauldron = true;
+        }
+    }
+
+
+    void Win(PlayerController otherPlayer)
+    {
+        Destroy(otherPlayer.gameObject);
+    }
+
+
+    void Lose(PlayerController otherPlayer)
+    {
+        Destroy(gameObject);
+    }
+
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        PlayerController otherPlayer = collision.gameObject.GetComponent<PlayerController>();
+
+         if (otherPlayer != null) { //Colliding with another player
+            if (Type == PlayerType.WIZARD) {
+                if (otherPlayer.IsTransformed()) {
+                    Lose(otherPlayer);
+                }
+            }
+            else if (!otherPlayer.IsTransformed()) {
+                Win(otherPlayer);
+            }
+            else if (Type == PlayerType.MOUSE) {
+                if (otherPlayer.Type == PlayerType.ELEPHANT) {
+                    Win(otherPlayer);
+                }
+            }
+            else if (Type == PlayerType.CAT) {
+                if (otherPlayer.Type == PlayerType.MOUSE) {
+                    Win(otherPlayer);
+                }
+            }
+            else if (Type == PlayerType.ELEPHANT) {
+                if (otherPlayer.Type == PlayerType.CAT) {
+                    Win(otherPlayer);
+                }
+            }
         }
     }
 
@@ -70,7 +114,7 @@ public class PlayerController : MonoBehaviour {
             Destroy(collidingItem.gameObject);
         }
 
-        if (isNearCauldron && pickedUpItemType != ItemType.NONE && !isTransformed) {
+        if (isNearCauldron && pickedUpItemType != ItemType.NONE && Type == PlayerType.WIZARD) {
             Transform();
         }
     }
@@ -88,7 +132,6 @@ public class PlayerController : MonoBehaviour {
             TransformIntoElephant();
         }
 
-        isTransformed = true;
         Invoke("OnTransformTimeUp", Constants.TRANSFORMATION_DURATION);
         pickedUpItemType = ItemType.NONE;
     }
@@ -97,30 +140,39 @@ public class PlayerController : MonoBehaviour {
     void OnTransformTimeUp()
     {
         SetColor(new Color(1, 1, 1));
-        isTransformed = false;
+        Type = PlayerType.WIZARD;
     }
 
 
     void TransformIntoMouse()
     {
         SetColor(new Color(0, 0, 2));
+        Type = PlayerType.MOUSE;
     }
 
 
     void TransformIntoCat()
     {
         SetColor(new Color(0, 2, 0));
+        Type = PlayerType.CAT;
     }
 
 
     void TransformIntoElephant()
     {
         SetColor(new Color(2, 0, 0));
+        Type = PlayerType.ELEPHANT;
     }
 
 
     void SetColor(Color color)
     {
         GetComponentInChildren<SpriteRenderer>().material.color = color;
+    }
+
+
+    public bool IsTransformed()
+    {
+        return Type != PlayerType.WIZARD;
     }
 }
