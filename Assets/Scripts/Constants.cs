@@ -39,4 +39,5 @@ public class Constants
     public const float PLAYER_NORMAL_SPEED = 8;
     public const float TRANSFORMATION_DURATION = 10;
     public const int NUM_BOXES = 10;
+    public const float CAULDRON_RELOCATE_TIME = 20;
 }

@@ -79,6 +79,8 @@ public class PlayerController : MonoBehaviour {
         otherPlayer.Start();
         Reset();
         BoxManager.instance.RespawnBoxes();
+
+        FindObjectOfType<Cauldron>().Relocate();
     }
 
 
