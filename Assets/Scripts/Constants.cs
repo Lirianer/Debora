@@ -53,4 +53,5 @@ public class Constants
     public const float TRANSFORMATION_DURATION = 13;
     public const int NUM_BOXES = 10;
     public const float CAULDRON_RELOCATE_TIME = 20;
+    public const int GAME_TIME = 90;
 }

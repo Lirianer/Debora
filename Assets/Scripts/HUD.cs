@@ -11,7 +11,7 @@ public class HUD : MonoBehaviour {
 	}
 
 
-    TextMesh GetScoreTextMesh()
+    protected TextMesh GetScoreTextMesh()
     {
         return transform.Find("Text").GetComponent<TextMesh>();
     }
