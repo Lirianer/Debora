@@ -49,9 +49,12 @@ public class Constants
 
     public const float TIME_BETWEEN_ITEM_SPAWNS = 4;
     public const float ITEM_DURATION = 15;
-    public const float PLAYER_NORMAL_SPEED = 8;
+    public const float PLAYER_NORMAL_SPEED = 6;
     public const float TRANSFORMATION_DURATION = 13;
     public const int NUM_BOXES = 10;
     public const float CAULDRON_RELOCATE_TIME = 20;
     public const int GAME_TIME = 90;
+    public const float PAUSED_TIME_SCALE = 0.0001f;
+    public const float WIN_PAUSE_DURATION = 3;
+
 }

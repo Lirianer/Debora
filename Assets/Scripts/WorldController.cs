@@ -22,10 +22,16 @@ public class WorldController : MonoBehaviour
             GameObject playerGO = GameObject.Find("Player" + i);
             playerGO.GetComponent<PlayerInput>().SetControlType(GetControlType());
 
-            HUD hud = GameObject.Find("HUD/HUD" + i).GetComponent<HUD>();
+            HUD hud = GetHUD(i);
             playerGO.GetComponent<PlayerController>().SetHUD(hud);
         }
         
+    }
+
+
+    static public HUD GetHUD(int num)
+    {
+        return GameObject.Find("HUD/HUD" + num).GetComponent<HUD>();
     }
 
 

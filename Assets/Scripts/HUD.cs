@@ -22,4 +22,10 @@ public class HUD : MonoBehaviour {
         score++;
         GetScoreTextMesh().text = "" + score;
     }
+
+
+    public int GetScore()
+    {
+        return score;
+    }
 }
