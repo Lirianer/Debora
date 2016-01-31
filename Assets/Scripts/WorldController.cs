@@ -8,16 +8,20 @@ public class WorldController : MonoBehaviour
     int gamePadsAvailable = 0;
     int gamePadsOccupied = 0;
     int keyboardsOccupied = 0;
+    int numPlayers;
 
-    void Awake ()
+    void Awake()
     {
+        numPlayers = 2;
+
         List<string> gamePadsNames = new List<string>(Input.GetJoystickNames());
         gamePadsNames.RemoveAll(x => x == string.Empty);
         gamePadsAvailable = gamePadsNames.Count;
 
-        GameObject.Find("Player1").GetComponent<PlayerInput>().SetControlType(GetControlType());
-        GameObject.Find("Player2").GetComponent<PlayerInput>().SetControlType(GetControlType());
-  
+        for (int i = 1; i <= numPlayers; i++) {
+            GameObject.Find("Player" + i).GetComponent<PlayerInput>().SetControlType(GetControlType());
+        }
+        
     }
 
 
@@ -30,6 +34,12 @@ public class WorldController : MonoBehaviour
             }
             else if (gamePadsOccupied == 1) {
                 ret = Constants.GAMEPAD_2;
+            }
+            else if (gamePadsOccupied == 2) {
+                ret = Constants.GAMEPAD_3;
+            }
+            else if (gamePadsOccupied == 3) {
+                ret = Constants.GAMEPAD_4;
             }
             gamePadsOccupied++;
         }

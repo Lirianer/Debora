@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour
     Dictionary<ItemType, GameObject> itemIcons;
 
 	
-	void Start ()
+	void Awake ()
     {
         itemIcons = new Dictionary<ItemType, GameObject>();
         itemIcons[ItemType.CHEESE] = transform.Find("CheeseIcon").gameObject;

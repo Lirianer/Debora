@@ -32,7 +32,7 @@ public class PlayerInput : MonoBehaviour
 	public float GetHorizontalAxis()
 	{
         if (xAxisControlName == null) {
-            throw new UnityException("xAxisControlName is null");
+            throw new UnityException("xAxisControlName is null for control type " + controlType);
         }
 
 		return Input.GetAxis(xAxisControlName);
@@ -67,6 +67,16 @@ public class PlayerInput : MonoBehaviour
                 xAxisControlName = Constants.GAMEPAD2_HORIZONTALAXIS;
                 yAxisControlName = Constants.GAMEPAD2_VERTICALAXIS;
                 actionButton = Constants.GAMEPAD2_BUTTON_A;
+                break;
+            case Constants.GAMEPAD_3:
+                xAxisControlName = Constants.GAMEPAD3_HORIZONTALAXIS;
+                yAxisControlName = Constants.GAMEPAD3_VERTICALAXIS;
+                actionButton = Constants.GAMEPAD3_BUTTON_A;
+                break;
+            case Constants.GAMEPAD_4:
+                xAxisControlName = Constants.GAMEPAD4_HORIZONTALAXIS;
+                yAxisControlName = Constants.GAMEPAD4_VERTICALAXIS;
+                actionButton = Constants.GAMEPAD4_BUTTON_A;
                 break;
         }
     }

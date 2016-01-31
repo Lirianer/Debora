@@ -8,6 +8,8 @@ public class Constants
     public const string KEYBOARD_RIGHT = "KEYBOARD_RIGHT";
     public const string GAMEPAD_1 = "GAMEPAD_1";
     public const string GAMEPAD_2 = "GAMEPAD_2";
+    public const string GAMEPAD_3 = "GAMEPAD_3";
+    public const string GAMEPAD_4 = "GAMEPAD_4";
 
     // Keyboard 1 (left)
     public const string KEYBOARD1_VERTICALAXIS = "keyboard_1_Y";
@@ -33,6 +35,17 @@ public class Constants
     public const string GAMEPAD2_BUTTON_A = "gamePad_2_A";
     public const string GAMEPAD2_BUTTON_B = "";
 
+    // Gamepad 3
+    public const string GAMEPAD3_VERTICALAXIS = "gamePad_3_Y";
+    public const string GAMEPAD3_HORIZONTALAXIS = "gamePad_3_X";
+    public const string GAMEPAD3_BUTTON_A = "gamePad_3_A";
+    public const string GAMEPAD3_BUTTON_B = "";
+
+    // Gamepad 4
+    public const string GAMEPAD4_VERTICALAXIS = "gamePad_4_Y";
+    public const string GAMEPAD4_HORIZONTALAXIS = "gamePad_4_X";
+    public const string GAMEPAD4_BUTTON_A = "gamePad_4_A";
+    public const string GAMEPAD4_BUTTON_B = "";
 
     public const float TIME_BETWEEN_ITEM_SPAWNS = 4;
     public const float ITEM_DURATION = 15;
