@@ -84,7 +84,7 @@ public class ItemManager : MonoBehaviour
 
     static bool IsColliderNear(Collider2D collider, Transform transform)
     {
-        return Vector2.Distance(collider.transform.position, transform.position) < 0.5f;
+        return Vector2.Distance(collider.transform.position, transform.position) < 1.3f;
     }
     
 

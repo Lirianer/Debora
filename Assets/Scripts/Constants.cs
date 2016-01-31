@@ -34,10 +34,10 @@ public class Constants
     public const string GAMEPAD2_BUTTON_B = "";
 
 
-    public const float TIME_BETWEEN_ITEM_SPAWNS = 5;
+    public const float TIME_BETWEEN_ITEM_SPAWNS = 4;
     public const float ITEM_DURATION = 15;
     public const float PLAYER_NORMAL_SPEED = 8;
-    public const float TRANSFORMATION_DURATION = 10;
+    public const float TRANSFORMATION_DURATION = 13;
     public const int NUM_BOXES = 10;
     public const float CAULDRON_RELOCATE_TIME = 20;
 }
