@@ -38,4 +38,5 @@ public class Constants
     public const float ITEM_DURATION = 15;
     public const float PLAYER_NORMAL_SPEED = 8;
     public const float TRANSFORMATION_DURATION = 10;
+    public const int NUM_BOXES = 10;
 }

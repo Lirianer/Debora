@@ -74,8 +74,11 @@ public class PlayerController : MonoBehaviour {
 
     void Win(PlayerController otherPlayer)
     {
+        Instantiate(Resources.Load("PlayerDeath"), otherPlayer.transform.position + new Vector3(0, 1.5f, 0), Quaternion.identity);
+
         otherPlayer.Start();
         Reset();
+        BoxManager.instance.RespawnBoxes();
     }
 
 

@@ -33,13 +33,7 @@ public class ItemManager : MonoBehaviour
 
     static Vector2 GetRandomSpawnPos()
     {
-        Vector2 pos;
-        do {
-            pos = GetRandomPositionAwayFromWalls();
-        }
-        while (IsNearCauldron(pos));
-
-        return pos;
+        return GetRandomPositionAwayFromWallsAndCauldron();
     }
 
 
@@ -52,6 +46,18 @@ public class ItemManager : MonoBehaviour
     static Vector2 GetCauldronPos()
     {
         return GameObject.Find("Cauldron").transform.position;
+    }
+
+
+    static public Vector2 GetRandomPositionAwayFromWallsAndCauldron()
+    {
+        Vector2 pos;
+        do {
+            pos = GetRandomPositionAwayFromWalls();
+        }
+        while (IsNearCauldron(pos));
+
+        return pos;
     }
 
 
@@ -86,5 +92,7 @@ public class ItemManager : MonoBehaviour
     {
         return new List<Transform>(GameObject.Find("Floors").GetComponentsInChildren<Transform>());
     }
+
+
 
 }
