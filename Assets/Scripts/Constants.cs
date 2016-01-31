@@ -55,6 +55,6 @@ public class Constants
     public const float CAULDRON_RELOCATE_TIME = 20;
     public const int GAME_TIME = 90;
     public const float PAUSED_TIME_SCALE = 0.0001f;
-    public const float WIN_PAUSE_DURATION = 3;
+    public const float END_SCREEN_DURATION = 3;
 
 }

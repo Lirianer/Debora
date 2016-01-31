@@ -13,7 +13,7 @@ public class TimeHUD : HUD {
         InvokeRepeating("DecreaseSecond", 1, 1);
         GetWinTextMesh().text = "";
 	}
-	
+
 
     void DecreaseSecond()
     {
@@ -23,20 +23,16 @@ public class TimeHUD : HUD {
         if (secondsLeft == 0) {
             GetComponent<SpriteRenderer>().enabled = false;
             GetScoreTextMesh().text = "";
-            
+
             if (GetWinningPlayerNum() == 1) {
-                GetWinTextMesh().text = "PLAYER 1 WINS!!";
+                Application.LoadLevel("Player1Wins");
             }
             else if (GetWinningPlayerNum() == 2) {
-                GetWinTextMesh().text = "PLAYER 2 WINS!!";
+                Application.LoadLevel("Player2Wins");
             }
             else {
-                GetWinTextMesh().text = "DRAW!";
+                Application.LoadLevel("Draw");
             }
-
-            CancelInvoke("DecreaseSecond");
-            Invoke("ResetGame", Constants.WIN_PAUSE_DURATION);
-            isStopped = true;
         }
     }
 
