@@ -14,11 +14,18 @@ public class PlayerController : MonoBehaviour {
     ItemType pickedUpItemType = ItemType.NONE;
     bool isNearCauldron = false;
     GameObject collidingItem = null;
+    HUD hud;
 
     void Start()
     {
         Reset();
         SetInRandomPos();
+    }
+
+
+    public void SetHUD(HUD hud)
+    {
+        this.hud = hud;
     }
 
 
@@ -81,6 +88,8 @@ public class PlayerController : MonoBehaviour {
         BoxManager.instance.RespawnBoxes();
 
         FindObjectOfType<Cauldron>().Relocate();
+
+        hud.IncreaseScore();
     }
 
 

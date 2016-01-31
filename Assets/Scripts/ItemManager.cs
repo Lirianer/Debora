@@ -63,22 +63,22 @@ public class ItemManager : MonoBehaviour
 
     static public Vector2 GetRandomPositionAwayFromWalls()
     {
-        List<Transform> allFloorTransforms = GetAllFloorTransforms();
+        List<GameObject> allFloorTransforms = GetAllFloorGameObjects();
 
-        Transform randomFloorTransform;
+        GameObject randomFloorGO;
         do {
-            randomFloorTransform = Utils.mGetRandomListElement<Transform>(allFloorTransforms);
+            randomFloorGO = Utils.mGetRandomListElement<GameObject>(allFloorTransforms);
         }
-        while (IsThereAColliderNearby(randomFloorTransform));
+        while (IsThereAColliderNearby(randomFloorGO));
 
-        return randomFloorTransform.position;
+        return randomFloorGO.transform.position;
     }
 
 
-    static bool IsThereAColliderNearby(Transform transform)
+    static bool IsThereAColliderNearby(GameObject go)
     {
         List<Collider2D> colliders = new List<Collider2D>(FindObjectsOfType<Collider2D>());
-        return colliders.Exists(x => IsColliderNear(x, transform));
+        return colliders.Exists(x => IsColliderNear(x, go.transform));
     }
 
 
@@ -88,9 +88,11 @@ public class ItemManager : MonoBehaviour
     }
     
 
-    static List<Transform> GetAllFloorTransforms()
+    static List<GameObject> GetAllFloorGameObjects()
     {
-        return new List<Transform>(GameObject.Find("Floors").GetComponentsInChildren<Transform>());
+        //return new List<Transform>(GameObject.Find("Floors").GetComponentsInChildren<Transform>());
+
+        return new List<GameObject>(GameObject.FindGameObjectsWithTag("Floor"));
     }
 
 

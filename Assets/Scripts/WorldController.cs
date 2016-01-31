@@ -19,7 +19,11 @@ public class WorldController : MonoBehaviour
         gamePadsAvailable = gamePadsNames.Count;
 
         for (int i = 1; i <= numPlayers; i++) {
-            GameObject.Find("Player" + i).GetComponent<PlayerInput>().SetControlType(GetControlType());
+            GameObject playerGO = GameObject.Find("Player" + i);
+            playerGO.GetComponent<PlayerInput>().SetControlType(GetControlType());
+
+            HUD hud = GameObject.Find("HUD/HUD" + i).GetComponent<HUD>();
+            playerGO.GetComponent<PlayerController>().SetHUD(hud);
         }
         
     }
