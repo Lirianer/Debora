@@ -5,7 +5,7 @@ public class Cauldron : MonoBehaviour {
 
     void Start()
     {
-        //InvokeRepeating("Relocate", Constants.CAULDRON_RELOCATE_TIME, Constants.CAULDRON_RELOCATE_TIME);
+        InvokeRepeating("Relocate", Constants.CAULDRON_RELOCATE_TIME, Constants.CAULDRON_RELOCATE_TIME);
     }
 
 
